@@ -131,22 +131,30 @@ void depositar(float *real) {
     // Implementar extrato... 
 }
 
-int sacar(float *real){
-    puts("Digite a quantidade a sacar(R$):");
-    float valor;
-    scanf("%f", &valor);
-    
-    if (valor > 0) {
-        *real -= valor;  // subtrai o valor do real
-        printf("Novo saldo: %.2f\n", *real);
-        puts("Transacao realizada com sucesso!");
-    } else {
-        puts("Houve um erro! Digite um valor valido...");
+int sacar(int senha, float *real){
+    puts("Digite sua senha: ");
+    int senh;
+    scanf("%d", &senh);
+    if (senh == senha){
+        puts("Digite a quantidade a sacar(R$):");
+        float valor;
+        scanf("%f", &valor);
+        float veri = *real; // copia do real (valor para verificação)
+        if (valor > 0 && veri - valor >= 0) {
+            *real -= valor;  // subtrai o valor do real
+            printf("Novo saldo: %.2f\n", *real);
+            puts("Transacao realizada com sucesso!");
+        } else {
+            puts("Houve um erro!!!");
+        }
+        // Implementar extrato... 
     }
-    // Implementar extrato... 
+    else{
+            puts("Senha incorreta!");
+    }
 }
 
-int comprar_cripto(int senha, float *bit){
+int comprar_cripto(int senha, float *real, float *bit, float *eth, float *rip, int *cot_bit, int *cot_eth, int *cot_rip){
     puts("Digite sua senha: ");
     int senh;
     scanf("%d", &senh);
@@ -157,29 +165,119 @@ int comprar_cripto(int senha, float *bit){
             int esc;
             scanf("%d", &esc);
             if (esc < 0 && esc > 4)
-                puts("Escolha uma opcao valida...");
+                puts("Opcao invalida...");
             else {
                 // Colocar a quantidade da moeda ou a quantidade em reais?
                 puts("Digite a quantidade:");
                 float valor;
                 scanf("%f", &valor);
-                
-                if (valor > 0) {
-                    *bit += valor;  // Adiciona o valor depositado ao real
-                    printf("Novo saldo: %.2f\n", *bit);
-                    puts("Transacao realizada com sucesso!");
-                } else {
-                    puts("Houve um erro! Digite um valor valido...");
+                float veri = *real; // copia do real (valor para verificação)
+                if (esc == 1){
+                    if (valor > 0 && (veri - (valor * *cot_bit * 1.02)) >=0) {
+                        *real -= (valor * *cot_bit * 1.02);
+                        *bit += valor;  // Adiciona o valor depositado ao real
+                        printf("Saldo Bitcoin: %.2f\n", *bit);
+                        puts("Transacao realizada com sucesso!");
+                    } else {
+                        puts("Houve um erro!!!");
+                    }
+                    // Implementar extrato... 
+                    return 0;
                 }
-                // Implementar extrato... 
-                return 0;
+                else if (esc == 2) {
+                        if (valor > 0 && (veri - (valor * *cot_eth * 1.01)) >=0) {
+                        *real -= (valor * *cot_eth * 1.01);
+                        *eth += valor;  // Adiciona o valor depositado ao real
+                        printf("Saldo Ethereum: %.2f\n", *eth);
+                        puts("Transacao realizada com sucesso!");
+                    } else {
+                        puts("Houve um erro!!!");
+                    }
+                    // Implementar extrato... 
+                    return 0;
+                }
+                else{
+                    if (valor > 0 && (veri - (valor * *cot_rip * 1.01)) >=0) {
+                        *real -= (valor * *cot_rip * 1.01);
+                        *rip += valor;  // Adiciona o valor depositado ao real
+                        printf("Saldo Ripple: %.2f\n", *rip);
+                        puts("Transacao realizada com sucesso!");
+                    } else{
+                        puts("Houve um erro!!!");
+                    }
+                    // Implementar extrato... 
+                    return 0;
+                }
             }
         }
     }
+    else{
+            puts("Senha incorreta!");
+        }
 }
 
-int vender_cripto(){
-    puts("Funcionando 6...\n");
+int vender_cripto(int senha, float *real, float *bit, float *eth, float *rip, int *cot_bit, int *cot_eth, int *cot_rip){
+    puts("Digite sua senha: ");
+    int senh;
+    scanf("%d", &senh);
+    if (senh == senha){
+        while(1){
+            puts("Escolha uma opcao: ");
+            menu2();
+            int esc;
+            scanf("%d", &esc);
+            if (esc < 0 && esc > 4)
+                puts("Opcao invalida...");
+            else {
+                // Colocar a quantidade da moeda ou a quantidade em reais?
+                puts("Digite a quantidade:");
+                float valor;
+                scanf("%f", &valor);
+                if (esc == 1){
+                    float veri = *bit; // copia do bit (valor para verificação)
+                    if (valor > 0 && (veri - valor) >=0) {
+                        *real += (valor * *cot_bit * 0.97);
+                        *bit -= valor; 
+                        printf("Saldo Bitcoin: %.2f\n", *bit);
+                        puts("Transacao realizada com sucesso!");
+                    } else {
+                        puts("Houve um erro!!!");
+                    }
+                    // Implementar extrato... 
+                    return 0;
+                }
+                else if (esc == 2) {
+                    float veri = *eth; // copia do eth (valor para verificação)
+                    if (valor > 0 && (veri - valor) >=0) {
+                    *real += (valor * *cot_eth * 0.98);
+                    *eth -= valor; 
+                    printf("Saldo Ethereum: %.2f\n", *eth);
+                    puts("Transacao realizada com sucesso!");
+                    } else {
+                        puts("Houve um erro!!!");
+                    }
+                    // Implementar extrato... 
+                    return 0;
+                }
+                else{
+                    float veri = *rip; // copia do real (valor para verificação)
+                    if (valor > 0 && (veri - valor) >=0) {
+                        *real += (valor * *cot_rip * 0.99);
+                        *rip -= valor;  
+                        printf("Saldo Ripple: %.2f\n", *rip);
+                        puts("Transacao realizada com sucesso!");
+                    } else{
+                        puts("Houve um erro!!!");
+                    }
+                    // Implementar extrato... 
+                    return 0;
+                }
+            }
+        }
+    }
+    else{
+            puts("Senha incorreta!");
+        }
 }
 
 int atualizar_cot(){

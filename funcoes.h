@@ -32,11 +32,11 @@ int consultar_extrato();
 
 void depositar( float *real);
 
-int sacar(float *real);
+int sacar(int senha,float *real);
 
-int comprar_cripto(int senha, float *bit);
+int comprar_cripto(int senha, float *real ,float *bit, float *eth, float *rip, int *cot_bit, int *cot_eth, int *cot_rip);
 
-int vender_cripto();
+int vender_cripto(int senha, float *real ,float *bit, float *eth, float *rip, int *cot_bit, int *cot_eth, int *cot_rip);
 
 int atualizar_cot();
 
