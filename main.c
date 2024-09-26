@@ -19,7 +19,7 @@ int main(void) {
         printf("CPF: ");
         scanf("%s", cpf);
         printf("Senha: ");
-        scanf("%d", &senha);  // Corrigido: &senha (para passar o endereço de memória)
+        scanf("%d", &senha);  
 
         printf("\n");
 
@@ -46,10 +46,10 @@ int main(void) {
                 } else {
                     if (esc == 1) {consultar_saldo(usuarios[usuario_autenticado].nome, usuarios[usuario_autenticado].cpf);}
                     else if (esc == 2) { consultar_extrato(); }
-                    else if (esc == 3) { depositar(); }
-                    else if (esc == 4) { sacar(); }
-                    else if (esc == 5) { comprar_cripto(); }
-                    else if (esc == 6) { vender_cripto(); }
+                    else if (esc == 3) { depositar(&real); }
+                    else if (esc == 4) { sacar(senha, &real); }
+                    else if (esc == 5) { comprar_cripto(senha, &real ,&bit ,&eth ,&rip ,&cot_bit, &cot_eth, &cot_rip); }
+                    else if (esc == 6) { vender_cripto(senha, &real ,&bit ,&eth ,&rip ,&cot_bit, &cot_eth, &cot_rip); }
                     else if (esc == 7) { atualizar_cot(); }
                     else if (esc == 8) {return 0;}
                 }
