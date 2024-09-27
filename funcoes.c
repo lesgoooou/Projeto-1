@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <time.h>
 #include "funcoes.h" 
 
 float bit = 0;
@@ -99,6 +100,27 @@ void formatar_cpf(char cpf[], char cpf_formatado[]) {
              cpf[9], cpf[10]);       
 }
 
+int formatar_hora(){
+    // Cria uma variável para armazenar o tempo atual
+    time_t tempoAtual;
+
+    // Obtém o tempo atual (em segundos desde o Epoch - 01/01/1970)
+    time(&tempoAtual);
+
+    // Converte o tempo em uma estrutura legível (localtime)
+    struct tm *tempoLocal = localtime(&tempoAtual);
+
+    // Exibe o tempo no formato de data e hora (dia/mês/ano horas:minutos:segundos)
+    return printf("%02d/%02d/%04d %02d:%02d:%02d", 
+           tempoLocal->tm_mday,
+           tempoLocal->tm_mon + 1,    // tm_mon começa em 0 (janeiro), então somamos 1
+           tempoLocal->tm_year + 1900, // tm_year é o número de anos desde 1900
+           tempoLocal->tm_hour,
+           tempoLocal->tm_min,
+           tempoLocal->tm_sec);
+
+}
+
 void consultar_saldo(char nome[], char cpf[]){
     char cpf_formatado[15];  
     formatar_cpf(cpf, cpf_formatado);
@@ -111,13 +133,13 @@ void consultar_saldo(char nome[], char cpf[]){
 }
 
 int consultar_extrato(){
-    puts("Funcionando 2...\n");
+    formatar_hora();
+
+    return 0;
 }
 
-#include <stdio.h>
-
 void depositar(float *real) {
-    puts("Digite a quantidade a ser depositada(R$):");
+    printf("Digite a quantidade a ser depositada(R$):");
     float valor;
     scanf("%f", &valor);
     
@@ -132,11 +154,13 @@ void depositar(float *real) {
 }
 
 int sacar(int senha, float *real){
-    puts("Digite sua senha: ");
+
+    printf("Digite sua senha: ");
     int senh;
     scanf("%d", &senh);
     if (senh == senha){
-        puts("Digite a quantidade a sacar(R$):");
+        printf("Digite a quantidade a sacar(R$):");
+
         float valor;
         scanf("%f", &valor);
         float veri = *real; // copia do real (valor para verificação)
@@ -155,12 +179,14 @@ int sacar(int senha, float *real){
 }
 
 int comprar_cripto(int senha, float *real, float *bit, float *eth, float *rip, int *cot_bit, int *cot_eth, int *cot_rip){
-    puts("Digite sua senha: ");
+    printf("Digite sua senha: ");
+
     int senh;
     scanf("%d", &senh);
     if (senh == senha){
         while(1){
-            puts("Escolha uma opcao: ");
+
+            printf("Escolha uma opcao: ");
             menu2();
             int esc;
             scanf("%d", &esc);
@@ -168,7 +194,8 @@ int comprar_cripto(int senha, float *real, float *bit, float *eth, float *rip, i
                 puts("Opcao invalida...");
             else {
                 // Colocar a quantidade da moeda ou a quantidade em reais?
-                puts("Digite a quantidade:");
+                printf("Digite a quantidade:");
+
                 float valor;
                 scanf("%f", &valor);
                 float veri = *real; // copia do real (valor para verificação)
@@ -217,12 +244,12 @@ int comprar_cripto(int senha, float *real, float *bit, float *eth, float *rip, i
 }
 
 int vender_cripto(int senha, float *real, float *bit, float *eth, float *rip, int *cot_bit, int *cot_eth, int *cot_rip){
-    puts("Digite sua senha: ");
+    printf("Digite sua senha: ");
     int senh;
     scanf("%d", &senh);
     if (senh == senha){
         while(1){
-            puts("Escolha uma opcao: ");
+            printf("Escolha uma opcao: ");
             menu2();
             int esc;
             scanf("%d", &esc);
@@ -230,7 +257,7 @@ int vender_cripto(int senha, float *real, float *bit, float *eth, float *rip, in
                 puts("Opcao invalida...");
             else {
                 // Colocar a quantidade da moeda ou a quantidade em reais?
-                puts("Digite a quantidade:");
+                printf("Digite a quantidade:");
                 float valor;
                 scanf("%f", &valor);
                 if (esc == 1){
@@ -280,6 +307,30 @@ int vender_cripto(int senha, float *real, float *bit, float *eth, float *rip, in
         }
 }
 
-int atualizar_cot(){
-    puts("Funcionando 7...\n");
+int atualizar_cot(int *cot_bit, int *cot_eth, int *cot_rip){
+
+    srand(time(NULL));
+
+    double cincobtc = *cot_bit * 0.05;
+    double cincoeth = *cot_eth * 0.05;
+    double cincorip = *cot_rip * 0.05;
+
+    double limiteinfbtc = *cot_bit - cincobtc;
+    double limitesupbtc = *cot_bit + cincobtc;
+
+    double limiteinfeth = *cot_eth - cincoeth;
+    double limitesupeth = *cot_eth + cincoeth;
+
+    double limiteinfrip = *cot_rip - cincorip;
+    double limitesuprip = *cot_rip + cincorip;
+
+    double numAleatorioBTC = limitesupbtc - (rand()/(double)RAND_MAX)* (limitesupbtc - limiteinfbtc);
+    printf("Cotação Bitcoin: %.2f\n", numAleatorioBTC);
+
+    double numAleatorioETH = limitesupeth - (rand()/(double)RAND_MAX)* (limitesupeth - limiteinfeth);
+    printf("Cotação Ethereum: %.2f\n", numAleatorioETH);
+
+    double numAleatorioRIP = limitesuprip - (rand()/(double)RAND_MAX)* (limitesuprip - limiteinfrip);
+    printf("Cotação Ripple:%.2f\n", numAleatorioRIP);
+
 }

@@ -50,7 +50,7 @@ int main(void) {
                     else if (esc == 4) { sacar(senha, &real); }
                     else if (esc == 5) { comprar_cripto(senha, &real ,&bit ,&eth ,&rip ,&cot_bit, &cot_eth, &cot_rip); }
                     else if (esc == 6) { vender_cripto(senha, &real ,&bit ,&eth ,&rip ,&cot_bit, &cot_eth, &cot_rip); }
-                    else if (esc == 7) { atualizar_cot(); }
+                    else if (esc == 7) { atualizar_cot(&cot_bit, &cot_eth, &cot_rip); }
                     else if (esc == 8) {return 0;}
                 }
             }
