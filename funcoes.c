@@ -154,11 +154,13 @@ void depositar(float *real) {
 }
 
 int sacar(int senha, float *real){
+
     printf("Digite sua senha: ");
     int senh;
     scanf("%d", &senh);
     if (senh == senha){
         printf("Digite a quantidade a sacar(R$):");
+
         float valor;
         scanf("%f", &valor);
         float veri = *real; // copia do real (valor para verificação)
@@ -178,10 +180,12 @@ int sacar(int senha, float *real){
 
 int comprar_cripto(int senha, float *real, float *bit, float *eth, float *rip, int *cot_bit, int *cot_eth, int *cot_rip){
     printf("Digite sua senha: ");
+
     int senh;
     scanf("%d", &senh);
     if (senh == senha){
         while(1){
+
             printf("Escolha uma opcao: ");
             menu2();
             int esc;
@@ -191,6 +195,7 @@ int comprar_cripto(int senha, float *real, float *bit, float *eth, float *rip, i
             else {
                 // Colocar a quantidade da moeda ou a quantidade em reais?
                 printf("Digite a quantidade:");
+
                 float valor;
                 scanf("%f", &valor);
                 float veri = *real; // copia do real (valor para verificação)
