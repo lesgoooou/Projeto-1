@@ -33,7 +33,7 @@ int menu2();
 
 void consultar_saldo(char nome[], char cpf[]);
 
-int consultar_extrato(int num_strings);
+int consultar_extrato(int num_strings, int senha, char nome[], char cpf[]);
 
 int depositar(float *real, int *num_strings, float *bit, float *eth, float *rip);
 

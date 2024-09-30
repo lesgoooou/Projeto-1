@@ -45,7 +45,7 @@ int main(void) {
                     printf("Escolha uma opcao valida!\n");
                 } else {
                     if (esc == 1) {consultar_saldo(usuarios[usuario_autenticado].nome, usuarios[usuario_autenticado].cpf);}
-                    else if (esc == 2) { consultar_extrato(num_strings); }
+                    else if (esc == 2) { consultar_extrato(num_strings, senha, usuarios[usuario_autenticado].nome, usuarios[usuario_autenticado].cpf); }
                     else if (esc == 3) { depositar(&real,&num_strings, &bit ,&eth ,&rip); }
                     else if (esc == 4) { sacar(senha, &real, &num_strings, &bit ,&eth ,&rip); }
                     else if (esc == 5) { comprar_cripto(senha, &num_strings ,&real ,&bit ,&eth ,&rip ,&cot_bit, &cot_eth, &cot_rip); }

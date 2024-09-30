@@ -145,15 +145,20 @@ void consultar_saldo(char nome[], char cpf[]){
     printf("Reais: %.2f\n", real);
 }
 
-int consultar_extrato(int num_strings){
-    if (num_strings != 0){
-        for (int i = 0; i < num_strings; i++) {
-            printf("%s\n", extrato[i]);
-        }
+int consultar_extrato(int num_strings, int senha, char nome[], char cpf[]){
+    printf("Digite sua senha: ");
+    int senh;
+    scanf("%d", &senh);
+    if (senh == senha){
+        char cpf_formatado[15];  
+        formatar_cpf(cpf, cpf_formatado);
+
+        printf("Extrato de %s (CPF: %s):\n", nome, cpf_formatado); 
+            for (int i = 0; i < num_strings; i++) {
+                printf("%s\n", extrato[i]);
+            }
     }
-    else{
-        printf("Não há extrato");
-    }
+    
 
     return 0;
 }
