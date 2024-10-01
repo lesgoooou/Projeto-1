@@ -480,15 +480,15 @@ int atualizar_cot(double *cot_bit, double *cot_eth, double *cot_rip){
     double limitesuprip = *cot_rip + cincorip;
 
     double numAleatorioBTC = limitesupbtc - (rand()/(double)RAND_MAX)* (limitesupbtc - limiteinfbtc);
-    printf("Cotação Bitcoin: %.2f\n", numAleatorioBTC);
+    printf("Cotacao Bitcoin: %.2f\n", numAleatorioBTC);
     *cot_bit = numAleatorioBTC;
 
     double numAleatorioETH = limitesupeth - (rand()/(double)RAND_MAX)* (limitesupeth - limiteinfeth);
-    printf("Cotação Ethereum: %.2f\n", numAleatorioETH);
+    printf("Cotacao Ethereum: %.2f\n", numAleatorioETH);
     *cot_eth = numAleatorioETH;
 
     double numAleatorioRIP = limitesuprip - (rand()/(double)RAND_MAX)* (limitesuprip - limiteinfrip);
-    printf("Cotação Ripple:%.2f\n", numAleatorioRIP);
+    printf("Cotacao Ripple:%.2f\n", numAleatorioRIP);
     *cot_rip = numAleatorioRIP;
 
 
