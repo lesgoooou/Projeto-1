@@ -5,6 +5,7 @@
 #include <time.h>
 #include "funcoes.h" 
 
+
 float bit;
 float eth;
 float rip;
@@ -81,6 +82,7 @@ int salvar_arquivo(char nome_arquivo[],float *bit,float *eth, float *rip, float 
 //Arquivo
 
 
+
 int menu(){
     printf("\n");
     printf("1. Consultar saldo\n");
@@ -113,15 +115,18 @@ void criarUsuarios(Usuario usuarios[]) {
     strcpy(usuarios[0].nome, "Gabriel");
     strcpy(usuarios[0].nome_arquivo, "01_G.bin");
 
+
     strcpy(usuarios[1].cpf, "12345678902");
     usuarios[1].senha = 222;
     strcpy(usuarios[1].nome, "Bruno");
     strcpy(usuarios[1].nome_arquivo, "02_B.bin");
 
+
     strcpy(usuarios[2].cpf, "12345678903");
     usuarios[2].senha = 333;
     strcpy(usuarios[2].nome, "Daniel");
     strcpy(usuarios[2].nome_arquivo, "03_D.bin");
+
 
     strcpy(usuarios[3].cpf, "12345678904");
     usuarios[3].senha = 444;
@@ -153,6 +158,7 @@ void criarUsuarios(Usuario usuarios[]) {
     strcpy(usuarios[8].nome, "Catarina");
     strcpy(usuarios[8].nome_arquivo, "09_C.bin");
 
+
     strcpy(usuarios[9].cpf, "12345678910");
     usuarios[9].senha = 000;
     strcpy(usuarios[9].nome, "Mario");
@@ -176,6 +182,7 @@ void formatar_cpf(char cpf[], char cpf_formatado[]) {
              cpf[6], cpf[7], cpf[8], 
              cpf[9], cpf[10]);       
 }
+
 
 void formatar_hora(char* buffer, int len) {
     time_t tempoAtual;
@@ -204,6 +211,7 @@ int extrato_fun(int *num_strings,char tipo, float valor, char *moeda, double cot
         return 0;
     }
 }
+
 
 
 void consultar_saldo(char nome[], char cpf[]){
@@ -239,6 +247,7 @@ int consultar_extrato(int num_strings, int senha, char nome[], char cpf[]){
 }
 
 int depositar(float *real, int *num_strings, float *bit, float *eth, float *rip) {
+
     printf("Digite a quantidade a ser depositada(R$):");
     float valor;
     scanf("%f", &valor);
@@ -252,15 +261,16 @@ int depositar(float *real, int *num_strings, float *bit, float *eth, float *rip)
         float tx = 0.0;
         puts("Transacao realizada com sucesso!");
         extrato_fun(num_strings, tipo,valor,moeda,cota,tx, real, bit, eth, rip);
+
     } else {
         puts("Houve um erro! Digite um valor valido...");
     }
     // Implementar extrato... 
+
     return 0;
 }
 
 int sacar(int senha, float *real, int *num_strings, float *bit, float *eth, float *rip){
-
     printf("Digite sua senha: ");
     int senh;
     scanf("%d", &senh);
@@ -279,6 +289,7 @@ int sacar(int senha, float *real, int *num_strings, float *bit, float *eth, floa
             int cota = 0.0;
             float tx = 0.0;
             extrato_fun(num_strings, tipo,valor,moeda,cota,tx, real, bit, eth, rip);
+
         } else {
             puts("Houve um erro!!!");
         }
@@ -289,9 +300,9 @@ int sacar(int senha, float *real, int *num_strings, float *bit, float *eth, floa
     }
 }
 
+
 int comprar_cripto(int senha, int *num_strings, float *real, float *bit, float *eth, float *rip, double *cot_bit, double *cot_eth, double *cot_rip){
     printf("Digite sua senha: ");
-
     int senh;
     scanf("%d", &senh);
     if (senh == senha){
@@ -320,6 +331,7 @@ int comprar_cripto(int senha, int *num_strings, float *real, float *bit, float *
                         char moeda[5] = "BTC";
                         float tx = 0.02;
                         extrato_fun(num_strings, tipo,valor,moeda,*cot_bit,tx, real, bit, eth, rip);
+
                     } else {
                         puts("Houve um erro!!!");
                     }
@@ -336,6 +348,7 @@ int comprar_cripto(int senha, int *num_strings, float *real, float *bit, float *
                         char moeda[5] = "ETH";
                         float tx = 0.01;
                         extrato_fun(num_strings, tipo,valor,moeda,*cot_eth,tx, real, bit, eth, rip);
+
                     } else {
                         puts("Houve um erro!!!");
                     }
@@ -352,6 +365,7 @@ int comprar_cripto(int senha, int *num_strings, float *real, float *bit, float *
                         char moeda[5] = "RIP";
                         float tx = 0.01;
                         extrato_fun(num_strings, tipo,valor,moeda,*cot_rip,tx, real, bit, eth, rip);
+
                     } else{
                         puts("Houve um erro!!!");
                     }
@@ -408,6 +422,7 @@ int vender_cripto(int senha, int *num_strings ,float *real, float *bit, float *e
                     *eth -= valor; 
                     printf("Saldo Ethereum: %.2f\n", *eth);
                     puts("Transacao realizada com sucesso!");
+
                     char tipo = '-';
                     char moeda[5] = "ETH";
                     double cota = *cot_eth;
@@ -431,6 +446,7 @@ int vender_cripto(int senha, int *num_strings ,float *real, float *bit, float *e
                         double cota = *cot_rip;
                         float tx = 0.01;
                         extrato_fun(num_strings, tipo,valor,moeda,*cot_rip,tx, real, bit, eth, rip);
+
                     } else{
                         puts("Houve um erro!!!");
                     }
@@ -446,6 +462,7 @@ int vender_cripto(int senha, int *num_strings ,float *real, float *bit, float *e
 }
 
 int atualizar_cot(double *cot_bit, double *cot_eth, double *cot_rip){
+
 
     srand(time(NULL));
 
@@ -473,5 +490,6 @@ int atualizar_cot(double *cot_bit, double *cot_eth, double *cot_rip){
     double numAleatorioRIP = limitesuprip - (rand()/(double)RAND_MAX)* (limitesuprip - limiteinfrip);
     printf("Cotação Ripple:%.2f\n", numAleatorioRIP);
     *cot_rip = numAleatorioRIP;
+
 
 }

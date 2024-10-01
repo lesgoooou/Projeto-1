@@ -49,4 +49,3 @@ int comprar_cripto(int senha,int *num_strings, float *real ,float *bit, float *e
 int vender_cripto(int senha,int *num_strings, float *real ,float *bit, float *eth, float *rip, double *cot_bit, double *cot_eth, double *cot_rip);
 
 int atualizar_cot(double *cot_bit, double *cot_eth, double *cot_rip);
-

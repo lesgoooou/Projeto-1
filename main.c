@@ -23,6 +23,7 @@ int main(void) {
 
         printf("\n");
 
+
         int usuario_autenticado = -1;
         for (int i = 0; i < 10; i++) {
             if (strcmp(usuarios[i].cpf, cpf) == 0 && usuarios[i].senha == senha) {
@@ -46,6 +47,7 @@ int main(void) {
                     printf("Escolha uma opcao valida!\n");
                 } else {
                     if (esc == 1) {consultar_saldo(usuarios[usuario_autenticado].nome, usuarios[usuario_autenticado].cpf);}
+
                     else if (esc == 2) { consultar_extrato(num_strings, senha, usuarios[usuario_autenticado].nome, usuarios[usuario_autenticado].cpf); }
                     else if (esc == 3) { depositar(&real,&num_strings, &bit ,&eth ,&rip); salvar_arquivo(usuarios[usuario_autenticado].nome_arquivo,&bit,&eth,&rip,&real,&cot_bit,&cot_eth,&cot_rip,extrato, &num_strings); }
                     else if (esc == 4) { sacar(senha, &real, &num_strings, &bit ,&eth ,&rip); salvar_arquivo(usuarios[usuario_autenticado].nome_arquivo,&bit,&eth,&rip,&real,&cot_bit,&cot_eth,&cot_rip,extrato, &num_strings);}
