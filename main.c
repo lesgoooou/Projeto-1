@@ -31,12 +31,11 @@ int main(void) {
                 break;
             }
         }
-        ler_arquivo(usuarios[usuario_autenticado].nome_arquivo,&bit,&eth,&rip,&real,&cot_bit,&cot_eth,&cot_rip,extrato, &num_strings);
 
         if (usuario_autenticado != -1) {
             printf("Acesso permitido!\n");
             // Loop para o menu após login bem-sucedido
-
+        ler_arquivo(usuarios[usuario_autenticado].nome_arquivo,&bit,&eth,&rip,&real,&cot_bit,&cot_eth,&cot_rip,extrato, &num_strings);
             while (1) {
                 menu();
                 printf("Escolha uma opcao: ");
