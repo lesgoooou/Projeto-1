@@ -11,3 +11,4 @@ Para colocar nosso código para funcionar é simples, e pode ser feito pelos seg
 3. Por fim, digite o seguinte comando: "./Programa" (Ou a palavra que tenha escolhido no Passo 2). 
 
 Bruno Budano Mello RA: 22.124.006-2
+Gabriel Andrade Rosa Oliveira RA: 22.124.075-7
