@@ -12,3 +12,4 @@ Para colocar nosso código para funcionar é simples, e pode ser feito pelos seg
 
 Bruno Budano Mello RA: 22.124.006-2
 Gabriel Andrade Rosa Oliveira RA: 22.124.075-7
+Daniel Borrachina Clemente RA: 22.124.078-1
