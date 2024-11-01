@@ -1,5 +1,28 @@
 #define FUNCOES_H  
-#define FUNCOES_H
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ADMIN
+
+int menu_admin();
+
+typedef struct {
+    char cpf[10];
+    int senha;
+    char nome[50];
+} Admin;
+
+void criarAdmin(Admin admins[]);
+
+int cadastrar_invest();
+
+int exc_invest(); 
+
+int cadastrar_cripto(); 
+
+int exc_cripto();
+
+int atualizar_cota();
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////// INVEST
 
 extern float bit;
 extern float eth;
@@ -15,7 +38,6 @@ extern int num_strings;
 extern double cot_bit;
 extern double cot_eth;
 extern double cot_rip;
-
 
 typedef struct {
     char cpf[10];
