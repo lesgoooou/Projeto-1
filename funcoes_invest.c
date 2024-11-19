@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
-#include "funcoes.h" 
+#include "funcoes_invest.h" 
 
 
 float bit;
@@ -19,6 +19,32 @@ int num_strings;
 double cot_bit;
 double cot_eth;
 double cot_rip;
+
+
+// atualização projeto 3
+
+void criarMoedas(cripto criptos[]) {
+    strcpy(criptos[0].nome, "Bitcoin");
+    criptos[0].moeda = 5;
+    criptos[0].cota = 5000;
+    criptos[0].taxaV = 0.97;
+    criptos[0].taxaC = 1.02;
+
+
+    strcpy(criptos[1].nome, "Ethereum");
+    criptos[1].moeda = 2;
+    criptos[1].cota = 400;
+    criptos[1].taxaV = 0.98;
+    criptos[1].taxaC = 1.01;
+
+    strcpy(criptos[2].nome, "Ripple");
+    criptos[2].moeda = 1;
+    criptos[2].cota = 3500;
+    criptos[2].taxaV = 0.99;
+    criptos[2].taxaC = 1.01;
+}
+
+// atualização projeto 3
 
 //Arquivo
 
@@ -54,10 +80,7 @@ int ler_arquivo(char nome_arquivo[],float *bit,float *eth, float *rip, float *re
 
 int salvar_arquivo(char nome_arquivo[],float *bit,float *eth, float *rip, float *real, double *cot_bit, double *cot_eth,double *cot_rip, char extrato[][LEN], int *num_strings){
     FILE  *arquivo;
-    //abertura de arquivos
     arquivo = fopen(nome_arquivo, "wb");
-
-    //Gravando os dados no arquivo usando fwrite
 
     fwrite(bit,sizeof(float), 1,arquivo);
     fwrite(eth,sizeof(float),1,arquivo);
@@ -77,11 +100,7 @@ int salvar_arquivo(char nome_arquivo[],float *bit,float *eth, float *rip, float 
     fclose(arquivo);
 }
 
-
-
 //Arquivo
-
-
 
 int menu(){
     printf("\n");
@@ -108,63 +127,73 @@ int menu2(){
     return 0;
 }
 
-// Função que cria os usuários e retorna o array de usuários
-void criarUsuarios(Usuario usuarios[]) {
-    strcpy(usuarios[0].cpf, "12345678901");
-    usuarios[0].senha = 111;
-    strcpy(usuarios[0].nome, "Gabriel");
-    strcpy(usuarios[0].nome_arquivo, "01_G.bin");
+void criarUsuarios(const char *arquivo_investidores) {
+    Usuario usuarios[7];
 
+    strcpy(usuarios[0].cpf, "12345678904");
+    usuarios[0].senha = 444;
+    strcpy(usuarios[0].nome, "Livia");
+    usuarios[0].saldo = 1000.0;
 
-    strcpy(usuarios[1].cpf, "12345678902");
-    usuarios[1].senha = 222;
-    strcpy(usuarios[1].nome, "Bruno");
-    strcpy(usuarios[1].nome_arquivo, "02_B.bin");
+    strcpy(usuarios[1].cpf, "12345678905");
+    usuarios[1].senha = 555;
+    strcpy(usuarios[1].nome, "Julia");
+    usuarios[1].saldo = 2000.0;
 
+    strcpy(usuarios[2].cpf, "12345678906");
+    usuarios[2].senha = 666;
+    strcpy(usuarios[2].nome, "Ana");
+    usuarios[2].saldo = 3000.0;
 
-    strcpy(usuarios[2].cpf, "12345678903");
-    usuarios[2].senha = 333;
-    strcpy(usuarios[2].nome, "Daniel");
-    strcpy(usuarios[2].nome_arquivo, "03_D.bin");
+    strcpy(usuarios[3].cpf, "12345678907");
+    usuarios[3].senha = 777;
+    strcpy(usuarios[3].nome, "Ravi");
+    usuarios[3].saldo = 4000.0;
 
+    strcpy(usuarios[4].cpf, "12345678908");
+    usuarios[4].senha = 888;
+    strcpy(usuarios[4].nome, "Sergio");
+    usuarios[4].saldo = 5000.0;
 
-    strcpy(usuarios[3].cpf, "12345678904");
-    usuarios[3].senha = 444;
-    strcpy(usuarios[3].nome, "Livia");
-    strcpy(usuarios[3].nome_arquivo, "04_L.bin");
+    strcpy(usuarios[5].cpf, "12345678909");
+    usuarios[5].senha = 999;
+    strcpy(usuarios[5].nome, "Catarina");
+    usuarios[5].saldo = 6000.0;
 
-    strcpy(usuarios[4].cpf, "12345678905");
-    usuarios[4].senha = 555;
-    strcpy(usuarios[4].nome, "Julia");
-    strcpy(usuarios[4].nome_arquivo, "05_J.bin");
+    strcpy(usuarios[6].cpf, "12345678910");
+    usuarios[6].senha = 101010;
+    strcpy(usuarios[6].nome, "Mario");
+    usuarios[6].saldo = 7000.0;
 
-    strcpy(usuarios[5].cpf, "12345678906");
-    usuarios[5].senha = 666;
-    strcpy(usuarios[5].nome, "Ana");
-    strcpy(usuarios[5].nome_arquivo, "06_A.bin");
+    FILE *arquivo = fopen(arquivo_investidores, "wb");
+    if (!arquivo) {
+        printf("Erro ao criar o arquivo %s!\n", arquivo_investidores);
+        return;
+    }
 
-    strcpy(usuarios[6].cpf, "12345678907");
-    usuarios[6].senha = 777;
-    strcpy(usuarios[6].nome, "Ravi");
-    strcpy(usuarios[6].nome_arquivo, "07_R.bin");
+    fwrite(usuarios, sizeof(Usuario), 7, arquivo); // Salva apenas os 7 usuários
+    fclose(arquivo);
 
-    strcpy(usuarios[7].cpf, "12345678908");
-    usuarios[7].senha = 888;
-    strcpy(usuarios[7].nome, "Sergio");
-    strcpy(usuarios[7].nome_arquivo, "08_S.bin");
-
-    strcpy(usuarios[8].cpf, "12345678909");
-    usuarios[8].senha = 999;
-    strcpy(usuarios[8].nome, "Catarina");
-    strcpy(usuarios[8].nome_arquivo, "09_C.bin");
-
-
-    strcpy(usuarios[9].cpf, "12345678910");
-    usuarios[9].senha = 000;
-    strcpy(usuarios[9].nome, "Mario");
-    strcpy(usuarios[9].nome_arquivo, "00_M.bin");
-
+    // printf("Usuarios criados e salvos no arquivo %s com sucesso!\n", arquivo_investidores);
 }
+
+
+int carregarUsuarios(const char *arquivo_investidores, Usuario usuarios[]) {
+    FILE *arquivo = fopen(arquivo_investidores, "rb");
+    if (!arquivo) {
+        printf("Erro ao abrir o arquivo %s!\n", arquivo_investidores);
+        return 0;
+    }
+
+    int count = 0;
+    while (fread(&usuarios[count], sizeof(Usuario), 1, arquivo)) {
+        count++;
+    }
+
+    fclose(arquivo);
+    return count; // Retorna o número de usuários carregados
+}
+
 
 int verificarUsuario(Usuario usuarios[], int quantidade, char cpf[], int senha) {
     for (int i = 0; i < quantidade; i++) {
@@ -178,7 +207,7 @@ int verificarUsuario(Usuario usuarios[], int quantidade, char cpf[], int senha) 
 void formatar_cpf(char cpf[], char cpf_formatado[]) {
     snprintf(cpf_formatado, 15, "%c%c%c.%c%c%c.%c%c%c-%c%c",
              cpf[0], cpf[1], cpf[2], 
-             cpf[3], cpf[4], cpf[5], 
+             cpf[3], cpf[4], cpf[5],    
              cpf[6], cpf[7], cpf[8], 
              cpf[9], cpf[10]);       
 }
@@ -301,7 +330,7 @@ int sacar(int senha, float *real, int *num_strings, float *bit, float *eth, floa
 }
 
 
-int comprar_cripto(int senha, int *num_strings, float *real, float *bit, float *eth, float *rip, double *cot_bit, double *cot_eth, double *cot_rip){
+int comprar_cripto(int senha, int *num_strings, float *real, cripto criptos[]) {
     printf("Digite sua senha: ");
     int senh;
     scanf("%d", &senh);
@@ -322,15 +351,15 @@ int comprar_cripto(int senha, int *num_strings, float *real, float *bit, float *
                 scanf("%f", &valor);
                 float veri = *real; // copia do real (valor para verificação)
                 if (esc == 1){
-                    if (valor > 0 && (veri - (valor * *cot_bit * 1.02)) >=0) {
-                        *real -= (valor * *cot_bit * 1.02);
-                        *bit += valor;  // Adiciona o valor depositado ao real
-                        printf("Saldo Bitcoin: %.2f\n", *bit);
+                    if (valor > 0 && (veri - (valor * criptos[0].cota * criptos[0].taxaC)) >=0) {
+                        *real -= (valor * criptos[0].cota * criptos[0].taxaC);
+                        criptos[0].moeda += valor;  // Adiciona o valor depositado ao real
+                        printf("Saldo Bitcoin: %.2f\n", criptos[0].moeda);
                         puts("Transacao realizada com sucesso!");
                         char tipo = '+';
                         char moeda[5] = "BTC";
                         float tx = 0.02;
-                        extrato_fun(num_strings, tipo,valor,moeda,*cot_bit,tx, real, bit, eth, rip);
+                        extrato_fun(num_strings, tipo,valor,moeda,criptos[0].cota,tx, real, &criptos[0].moeda, &criptos[1].moeda, &criptos[2].moeda);
 
                     } else {
                         puts("Houve um erro!!!");
@@ -339,15 +368,15 @@ int comprar_cripto(int senha, int *num_strings, float *real, float *bit, float *
                     return 0;
                 }
                 else if (esc == 2) {
-                        if (valor > 0 && (veri - (valor * *cot_eth * 1.01)) >=0) {
-                        *real -= (valor * *cot_eth * 1.01);
-                        *eth += valor;  // Adiciona o valor depositado ao real
-                        printf("Saldo Ethereum: %.2f\n", *eth);
+                        if (valor > 0 && (veri - (valor * criptos[1].cota * criptos[1].taxaC)) >=0) {
+                        *real -= (valor * criptos[1].cota * criptos[1].taxaC);
+                        criptos[1].moeda += valor;  // Adiciona o valor depositado ao real
+                        printf("Saldo Ethereum: %.2f\n", criptos[1].moeda);
                         puts("Transacao realizada com sucesso!");
                         char tipo = '+';
                         char moeda[5] = "ETH";
                         float tx = 0.01;
-                        extrato_fun(num_strings, tipo,valor,moeda,*cot_eth,tx, real, bit, eth, rip);
+                        extrato_fun(num_strings, tipo,valor,moeda,criptos[1].cota,tx, real, &criptos[0].moeda, &criptos[1].moeda, &criptos[2].moeda);
 
                     } else {
                         puts("Houve um erro!!!");
@@ -356,15 +385,15 @@ int comprar_cripto(int senha, int *num_strings, float *real, float *bit, float *
                     return 0;
                 }
                 else{
-                    if (valor > 0 && (veri - (valor * *cot_rip * 1.01)) >=0) {
-                        *real -= (valor * *cot_rip * 1.01);
-                        *rip += valor;  // Adiciona o valor depositado ao real
-                        printf("Saldo Ripple: %.2f\n", *rip);
+                    if (valor > 0 && (veri - (valor * criptos[2].cota * criptos[2].taxaC)) >=0) {
+                        *real -= (valor * criptos[2].cota * criptos[2].taxaC);
+                        criptos[2].moeda += valor;  // Adiciona o valor depositado ao real
+                        printf("Saldo Ripple: %.2f\n", criptos[2].moeda);
                         puts("Transacao realizada com sucesso!");
                         char tipo = '+';
                         char moeda[5] = "RIP";
                         float tx = 0.01;
-                        extrato_fun(num_strings, tipo,valor,moeda,*cot_rip,tx, real, bit, eth, rip);
+                        extrato_fun(num_strings, tipo,valor,moeda,criptos[2].cota,tx, real, &criptos[0].moeda, &criptos[1].moeda, &criptos[2].moeda);
 
                     } else{
                         puts("Houve um erro!!!");
@@ -493,3 +522,4 @@ int atualizar_cot(double *cot_bit, double *cot_eth, double *cot_rip){
 
 
 }
+
